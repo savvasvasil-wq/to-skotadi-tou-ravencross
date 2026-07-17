@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Σάββας Βασιλειάδης - Συγγραφέας</title>
+    <style>
+        /* Σκοτεινό, Gothic Theme */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0b0b0d;
+            color: #e0e0e0;
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Εφέ Χιονιού στο Background */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* Η Πανσέληνος που Λαμπυρίζει */
+        .moon {
+            width: 80px;
+            height: 80px;
+            background: #fcfcfc;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.4), 0 0 50px 20px rgba(255, 255, 255, 0.15);
+            animation: pulse 4s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.3); }
+            100% { box-shadow: 0 0 35px 15px rgba(255, 255, 255, 0.5); }
+        }
+
+        /* Φωτογραφία Προφίλ */
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid #555;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        h1, h2 {
+            color: #b89742; /* Χρυσό/Μπρούτζινο Gothic χρώμα */
+            letter-spacing: 2px;
+        }
+
+        .bio {
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 50px;
+            color: #b0b0b0;
+        }
+
+        /* Ενότητα Βιβλίων */
+        .books-section {
+            margin-top: 30px;
+        }
+
+        .book-card {
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book-card:hover {
+            transform: scale(1.05);
+        }
+
+        .book-cover {
+            width: 200px;
+            height: 300px;
+            background-color: #1a1a24;
+            border: 1px solid #333;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Δεύτερη "Σελίδα" (Κρυφή αρχικά) */
+        .book-details-page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .btn-back {
+            background: none;
+            border: 1px solid #b89742;
+            color: #b89742;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: inherit;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #b89742;
+            color: #000;
+        }
+
+        .preorder-btn {
+            display: inline-block;
+            background: #8b0000; /* Σκούρο κόκκινο */
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .preorder-btn:hover {
+            background: #ff0000;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas για το εφέ χιονιού -->
+    <canvas id="snowCanvas"></canvas>
+
+    <div class="container">
+        
+        <!-- ΑΡΧΙΚΗ ΣΕΛΙΔΑ (Συγγραφέας & Βιβλιοθήκη) -->
+        <div id="homePage">
+            <div class="moon"></div>
+            <!-- Αντικατάστησε το src με το link της φωτογραφίας σου -->
+            <img class="profile-img" src="https://via.placeholder.com/150" alt="Σάββας Βασιλειάδης">
+            <h1>Σάββας Βασιλειάδης</h1>
+            <p class="bio">«Καλώς ήρθατε στο σκοτάδι. Εδώ όπου οι αναμνήσεις ψιθυρίζουν μυστικά που θα έπρεπε να έχουν ξεχαστεί...»</p>
+            
+            <div class="books-section">
+                <h2>Τα Έργα μου</h2>
+                <p style="color: #888; font-size: 14px;">(Κάντε κλικ στο εξώφυλλο για να εισέλθετε)</p>
+                <div class="book-card" onclick="openBookPage()">
+                    <!-- Εδώ θα μπει το εξώφυλλό σου -->
+                    <div class="book-cover">
+                        [ Εξώφυλλο: Σκοτεινή Ανάμνηση ]
+                    </div>
+                    <p style="margin-top:10px; font-weight: bold;">Σκοτεινή Ανάμνηση</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ΣΕΛΙΔΑ ΒΙΒΛΙΟΥ (Εμφανίζεται μετά το κλικ) -->
+        <div id="bookPage" class="book-details-page">
+            <button class="btn-back" onclick="goBack()">← Επιστροφή</button>
+            <div style="display: flex; flex-wrap: wrap; gap: 40px;">
+                <div class="book-cover" style="width: 250px; height: 380px;">
+                    [ Εξώφυλλο: Σκοτεινή Ανάμνηση ]
+                </div>
+                <div style="flex: 1; min-width: 280px;">
+                    <h2>Σκοτεινή Ανάμνηση</h2>
+                    <p style="color:#888;">Gothic Horror / Ψυχολογικό Θρίλερ</p>
+                    <hr style="border-color: #333;">
+                    <h3>Περίληψη</h3>
+                    <p style="line-height: 1.6;">[Εδώ θα κάνεις επικόλληση την επίσημη περίληψη του βιβλίου σου, εισάγοντας τον αναγνώστη στην ατμόσφαιρα του έργου σου.]</p>
+                    
+                    <h3>Απόσπασμα</h3>
+                    <blockquote style="border-left: 3px solid #b89742; padding-left: 15px; font-style: italic; color: #aaa;">
+                        "Το σκοτάδι δεν ήταν ποτέ άδειο. Απλώς περίμενε τη σωστή στιγμή για να θυμηθεί..."
+                    </blockquote>
+
+                    <a href="LINK_EVALUATION" class="preorder-btn" target="_blank">Προπαράγγειλε το βιβλίο εδώ</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Λειτουργία Εναλλαγής Σελίδων
+        function openBookPage() {
+            const home = document.getElementById('homePage');
+            const book = document.getElementById('bookPage');
+            
+            home.style.display = 'none';
+            book.style.display = 'block';
+            setTimeout(() => {
+                book.style.opacity = '1';
+            }, 50);
+        }
+
+        function goBack() {
+            const home = document.getElementById('homePage');
+            const book = document.getElementById('bookPage');
+            
+            book.style.opacity = '0';
+            setTimeout(() => {
+                book.style.display = 'none';
+                home.style.display = 'block';
+            }, 500);
+        }
+
+        // --- ΜΗΧΑΝΙΣΜΟΣ ΧΙΟΝΙΟΥ (Canvas HTML5) ---
+        const canvas = document.getElementById('snowCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const numFlakes = 80;
+        const flakes = [];
+
+        for (let i = 0; i < numFlakes; i++) {
+            flakes.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                r: Math.random() * 3 + 1, // Μέγεθος νιφάδας
+                d: Math.random() * numFlakes, // Πυκνότητα
+                speed: Math.random() * 1 + 0.5 // Ταχύτητα πτώσης
+            });
+        }
+
+        function drawSnow() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.beginPath();
+            for (let i = 0; i < numFlakes; i++) {
+                const f = flakes[i];
+                ctx.moveTo(f.x, f.y);
+                ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+            }
+            ctx.fill();
+            moveSnow();
+        }
+
+        function moveSnow() {
+            for (let i = 0; i < numFlakes; i++) {
+                const f = flakes[i];
+                f.y += f.speed;
+                f.x += Math.sin(f.d) * 0.5;
+
+                // Αν η νιφάδα φτάσει κάτω, ξαναξεκινάει από πάνω
+                if (f.y > height) {
+                    flakes[i] = { x: Math.random() * width, y: 0, r: f.r, d: f.d, speed: f.speed };
+                }
+            }
+        }
+
+        function animate() {
+            drawSnow();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
